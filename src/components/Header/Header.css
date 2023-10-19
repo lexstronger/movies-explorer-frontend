@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px 18px 70px;
+  background-color: transparent;
+}
+
+.header_color_blue {
+  background-color: rgba(7, 48, 66, 1);
+}
+
+.header_color_black {
+  background-color: rgba(32, 32, 32, 1);
+}
+
+.header__logo:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding-left: 14px;
+    padding-right: 12px;
+  }
+}

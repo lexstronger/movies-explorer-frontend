@@ -1,0 +1,21 @@
+.page {
+  min-width: 320px;
+  max-width: 1280px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(32, 32, 32, 1);
+  color: rgba(255, 255, 255, 1);
+  font-family: 'Inter', Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  background: rgba(32, 32, 32, 1);
+}
+

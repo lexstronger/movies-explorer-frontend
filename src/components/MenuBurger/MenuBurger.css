@@ -1,0 +1,126 @@
+.popup {
+  display: flex;
+  position: fixed;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s linear; 
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup__container {
+  max-width: 520px;
+  width: 100%;
+  height: 100vh;
+  padding: 23px 23px 92px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(32, 32, 32, 1);
+}
+
+.popup__cross {
+  margin: 0;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  background-image: url('../../images/cross.svg');
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  position: absolute;
+  top: 23px;
+  right: 23px;
+}
+
+.popup__cross:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.popup__links {
+  margin: 0;
+  padding: 0;
+  margin-top: 106px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.popup__link {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  transition: 0.4s ease;
+}
+
+.popup__link:hover {
+  cursor: pointer;
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+}
+
+.popup__link-item:last-of-type {
+  margin-top: 621px;
+}
+
+.popup__link-profile {
+  margin: 0;
+  padding: 0;
+  padding-top: 6px;
+  margin-right: 33px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+  transition: 0.4s ease;
+}
+
+.popup__link-profile:hover {
+  cursor: pointer;
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+}
+
+.popup__link-profile::before {
+  position: absolute;
+  top: 0;
+  left: 66px;
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: rgba(49, 49, 49, 1);
+  background-image: url('../../images/account.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__container {
+    padding: 14px 14px 48px;
+  }
+
+  .popup__link-item:last-of-type {
+    margin-top: 444px;
+  }
+}

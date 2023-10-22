@@ -8,7 +8,6 @@ function MoviesCardList() {
       <ul className="movies-cards__list">
         <MoviesCard/>
       </ul>
-      <button className="movies-cards__button">Еще</button>
     </section>
   );
 }

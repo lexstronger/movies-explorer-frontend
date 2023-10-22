@@ -1,6 +1,7 @@
 .search-string {
+  max-width: 1280px;
+  width: 100%;
   padding: 70px 0 43px;
-  margin: 0 70px;
   border-bottom: 1px solid rgba(170, 170, 170, 0.2);
 }
 
@@ -32,6 +33,10 @@
   width: 90%;
 }
 
+.search-form__input:focus {
+  outline: 1px solid #4285f4;
+}
+
 .search-form__button {
   width: 100px;
   height: 52px;
@@ -52,18 +57,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .search-string {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
 }
 
 @media screen and (max-width: 500px) {
-  .search-string {
-    margin-left: 14px;
-    margin-right: 14px;
-  }
-
   .search-form-container {
     min-height: 58px;
     padding: 6px;

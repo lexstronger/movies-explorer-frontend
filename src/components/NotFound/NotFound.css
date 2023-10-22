@@ -1,3 +1,7 @@
+.content {
+  flex: 1;
+}
+
 .not-found {
   background-color: (32, 32, 32, 1);
   text-align: center;

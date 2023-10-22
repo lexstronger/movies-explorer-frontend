@@ -36,6 +36,7 @@
   font-weight: 400;
   line-height: 58px;
   letter-spacing: -2px;
+  min-height: 58px;
 }
 
 .student__job {
@@ -46,6 +47,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+  min-height: 20px;
 }
 
 .student__text {

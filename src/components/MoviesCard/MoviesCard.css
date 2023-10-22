@@ -24,6 +24,7 @@
   margin: 0;
   padding: 0;
   max-width: 240px;
+  min-height: 18px;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -39,6 +40,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  min-height: 18px;
 }
 
 .movie-card__image {
@@ -60,8 +62,19 @@
   font-weight: 400;
   line-height: 11px;
   border-radius: 30px;
-  background: #313131;
+  background: rgba(49, 49, 49, 1);
   border: none;
+}
+
+.movie-card__button_save {
+  background-image: url('../../images/save.svg');
+}
+
+.movie-card__button_delete {
+  background-image: url('../../images/delete.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  color: rgba(255, 255, 255, 1)
 }
 
 .movie-card__button:hover {

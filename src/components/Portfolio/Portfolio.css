@@ -50,6 +50,7 @@
 .portfolio__site {
   margin: 0;
   max-width: 880px;
+  min-height: 50px;
   color: rgba(255, 255, 255, 1);
   font-size: 30px;
   font-style: normal;
@@ -59,15 +60,13 @@
 }
 
 .portfolio__arrow {
-  text-align: center;
-  color: rgba(255, 255, 255, 1);
-  width: 29px;
-  height: 100%;
+  background-image: url('../../images/arrow.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  height: 60px;
   margin: 0;
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 60px;
-  letter-spacing: -1.2px;
 }
 
 @media screen and (max-width: 800px) {
@@ -85,8 +84,6 @@
   
   .portfolio__arrow {
     width: 27px;
-    font-size: 28px;
-    letter-spacing: -1.12px;
     height: 60px;
   }
 }
@@ -105,6 +102,8 @@
   }
 
   .portfolio__item {
+    padding-top: 10px;
+    padding-bottom: 7px;
     border-bottom: 1px solid rgba(230, 230, 230, 1);
   }
 
@@ -116,9 +115,6 @@
 
   .portfolio__arrow {
     width: 18px;
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: -0.72px;
-    height: 28px;
+    height: 10px;
   }
 }

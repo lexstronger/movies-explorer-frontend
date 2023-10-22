@@ -39,12 +39,16 @@ function Navigation({ LoggedIn, handleLogin, onBurgerClick }) {
             >
               Аккаунт
             </NavLink>
+            <button
+              className="navigation__menu"
+              type="button"
+              onClick={onBurgerClick}
+            ></button>
           </nav>
-          <button className="navigation__menu" type="button" onClick={onBurgerClick}></button>
         </>
       )}
     </>
-  )
+  );
 }
 
 export default Navigation;

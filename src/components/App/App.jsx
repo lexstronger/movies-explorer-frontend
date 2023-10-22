@@ -32,6 +32,11 @@ function App() {
     navigate('/signin', { replace: true });
   };
 
+  function handleLogout() {
+    setLoggedIn(false);
+    navigate('/signin', { replace: true});
+  }
+
   function handleMenuBurgerClick() {
     setIsMenuBurgerOpened(true);
   }
@@ -60,7 +65,7 @@ function App() {
         />
         <Route
           path="/profile"
-          element={<Profile/>}
+          element={<Profile handleLogout={handleLogout}/>}
         />
         <Route
           path="/signin"

@@ -5,7 +5,7 @@ import "./MenuBurger.css";
 function MenuBurger({isOpen, onClose}) {
   return (
     <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
-      <div className="popup__container">
+      <nav className="popup__container">
         <button
           className="popup__cross"
           type="button"
@@ -26,7 +26,7 @@ function MenuBurger({isOpen, onClose}) {
             <NavLink className="popup__link-profile" to="/profile">Аккаунт</NavLink>
           </li>
         </ul>
-      </div>
+      </nav>
     </div>
   );
 }

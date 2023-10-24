@@ -11,7 +11,7 @@ function Promo({scrollDown}) {
           <p className="promo__text">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
           <button className="promo__button" type='button' onClick={scrollDown}>Узнать больше</button>
         </div>
-        <img className="promo__image" src={promoImage} alt="Логотип сайта" />
+        <img className="promo__image" src={promoImage} alt="Логотип сайта" aria-hidden="true"/>
       </div>
     </section>
   );

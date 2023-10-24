@@ -56,10 +56,11 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 800px) {
-}
-
 @media screen and (max-width: 500px) {
+  .search-string {
+    padding-bottom: 64px;
+  }
+
   .search-form-container {
     min-height: 58px;
     padding: 6px;

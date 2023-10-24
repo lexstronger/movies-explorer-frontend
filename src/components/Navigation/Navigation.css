@@ -97,3 +97,18 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .navigation {
+    gap: 10px;
+  }
+
+  .navigation__link {
+    font-size: 10px;
+  }
+
+  .navigation__link_active {
+    margin-left: 0px;
+    padding: 5px 12px;
+  }
+}

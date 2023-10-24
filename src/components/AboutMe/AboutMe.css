@@ -98,7 +98,7 @@
   }
 
   .student__name {
-    margin-bottom: 16px;
+    margin-bottom: 0px;
     font-size: 40px;
     line-height: 40px;
     letter-spacing: -1.6px;
@@ -139,6 +139,7 @@
   .student__info {
     flex-direction: column-reverse;
     align-items: center;
+    gap: 10px;
   }
 
   .student__cv {
@@ -147,13 +148,14 @@
 
   .student__name {
     margin-top: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 30px;
     line-height: normal;
     letter-spacing: -1.2px;
   }
 
   .student__job {
+    margin-bottom: 15px;
     font-size: 11px;
     line-height: 16px;
   }

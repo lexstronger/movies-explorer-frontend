@@ -3,7 +3,7 @@
 }
 
 .not-found {
-  background-color: (32, 32, 32, 1);
+  background-color: rgba(32, 32, 32, 1);
   text-align: center;
 }
 
@@ -15,6 +15,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  letter-spacing: 8px;
 }
 
 .not-found__text {
@@ -24,6 +25,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  letter-spacing: 0.5px;
 }
 
 .not-found__button {

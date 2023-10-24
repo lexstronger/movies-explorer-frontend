@@ -100,9 +100,10 @@
   }
 
   .promo__text {
-    margin-top: 22px;
+    margin-top: 8px;
     margin-bottom: 92px;
-    max-width: 250px;
+    max-width: 260px;
+    letter-spacing: 0.6px;
   }
 }
 

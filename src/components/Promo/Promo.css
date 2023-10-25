@@ -1,0 +1,145 @@
+.promo {
+  min-height: 574px;
+  padding: 0 70px;
+  background: rgba(7, 48, 66, 1);
+  display: flex;
+  flex-direction: column;  
+}
+
+.promo__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.promo__image {
+  width: 310px;
+  height: 304px;
+  padding-top: 75px;
+}
+
+.promo__textarea {
+  padding: 75px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo__heading {
+  margin: 0;
+  padding: 0;
+  max-width: 640px;
+  min-height: 114px;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+.promo__text {
+  margin: 0;
+  padding: 0;
+  margin: 36px 0 146px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.5;
+  max-width: 320px;
+  min-height: 32px;
+}
+
+.promo__button {
+  max-width: 129px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  background-color: transparent;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 10px 10px;
+  transition: 0.4s ease;
+}
+
+.promo__button:hover {
+  cursor: pointer;
+  color:rgba(0, 0, 0, 1);
+  background-color: rgba(61, 220, 132, 1);
+  border-color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 800px) {
+
+  .promo {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .promo__container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .promo__image {
+    padding-top: 140px;
+  }
+
+  .promo__textarea {
+    padding-top: 48px;
+    padding-bottom: 76px;
+    align-items:center;
+    text-align: center;
+  }
+
+  .promo__heading {
+    max-width: 680px;
+    font-size: 40px;
+    line-height: 50px;
+  }
+
+  .promo__text {
+    margin-top: 8px;
+    margin-bottom: 92px;
+    max-width: 260px;    
+  }
+
+  .promo__button {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .promo {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .promo__textarea {
+    padding-top: 44px;
+    padding-bottom: 30px;
+  }
+
+  .promo__heading {
+    max-width: 300px;
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: -1.2px;
+  }
+
+  .promo__text {
+    margin-top: 24px;
+    margin-bottom: 78px;
+  }
+
+  .promo__button {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .promo__image {
+    width: 210px;
+    height: 206px;
+    padding-top: 70px;
+  }
+}

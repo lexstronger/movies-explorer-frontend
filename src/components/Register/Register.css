@@ -1,0 +1,150 @@
+.content {
+  flex: 1;
+}
+
+.registration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 70px auto;
+  max-width: 396px;
+  width: 100%;
+}
+
+.registration__heading {
+  margin: 0;
+  padding: 0;
+  margin: 35px 0 40px;
+  text-align: left;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  align-self: start;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 1);
+  max-width: 396px;
+  width: 100%;
+}
+
+.registration-form__fieldset {
+  border: none;
+  padding: 0;
+}
+
+.registration-form__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration-form__label {
+  color: rgba(139, 139, 139, 1);
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 5px;
+}
+
+.registration-form__input {
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid rgba(66, 66, 66, 1);
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-bottom: 10px;
+  outline: none;
+}
+
+.registration-form__input:focus {
+  border-bottom: 1px solid rgba(66, 133, 244, 1);;
+}
+
+.registration-form__button {
+  min-height: 45px;
+  margin-top: 126px;
+  background-color: rgba(66, 133, 244, 1);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+  border: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.registration-form__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.registration__question-container {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+  justify-content: center;
+}
+
+.registration__question {
+  margin: 0;
+  color:rgba(139, 139, 139, 1);
+  letter-spacing: -1.3px;
+}
+
+.registration__question-link {
+  color: rgba(66, 133, 244, 1);
+  text-decoration: none;
+  letter-spacing: -1.3px;
+}
+
+.registration__question-link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .registration {
+    margin: 232px auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .registration {
+    margin: 56px auto 30px;
+  }
+
+  .registration__logo-link {
+    align-self: center;
+  }
+
+  .registration__heading {
+    align-self: center;
+    margin: 50px 0 80px;
+  }
+
+  .registration-form {
+    max-width: 260px;
+    width: 100%;
+  }
+
+  .registration-form__button {
+    margin-top: 217px;
+  }
+
+  .registration__question {
+    font-size: 12px;
+  }
+
+  .registration__question-link {
+    font-size: 12px;
+  }
+}

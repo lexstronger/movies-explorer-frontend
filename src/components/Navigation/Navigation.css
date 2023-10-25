@@ -10,7 +10,6 @@
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
-  letter-spacing: 0.8px;
   text-decoration: none;
 }
 
@@ -100,7 +99,7 @@
 
 @media screen and (max-width: 500px) {
   .navigation {
-    gap: 10px;
+    gap: 15px;
   }
 
   .navigation__link {

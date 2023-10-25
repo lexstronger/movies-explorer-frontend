@@ -1,0 +1,8 @@
+.logo-link {
+  align-self: start;
+}
+
+.logo-link__img:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

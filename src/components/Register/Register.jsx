@@ -1,19 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
 import "./Register.css";
+import Logo from "../Logo/Logo";
 
 function Register({ handleRegister }) {
   return (
     <main className="content">
       <section className="registration">
-        <Link className="registration__logo-link" to="/">
-          <img
-            className="registration__logo"
-            src={logo}
-            alt="Логотип сервиса"
-          />
-        </Link>
+        <Logo/>
         <h1 className="registration__heading">Добро пожаловать!</h1>
         <form className="registration-form" action="#" name="registration">
           <fieldset className="registration-form__fieldset">

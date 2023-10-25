@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.svg";
 import "./Login.css";
+import Logo from "../Logo/Logo";
 
 function Login({ handleLogin }) {
   return (
     <main className="content">
       <section className="login">
-        <Link className="login__logo-link" to="/">
-          <img className="login__logo" src={logo} alt="Логотип сервиса" />
-        </Link>
+        <Logo/>
         <h1 className="login__heading">Рады видеть!</h1>
         <form className="login-form" action="#" name="login">
           <fieldset className="login-form__fieldset">

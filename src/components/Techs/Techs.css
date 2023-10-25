@@ -89,6 +89,7 @@
   .techs__text {
     margin-top: 22px;
     min-height: 36px;
+    font-size: 12px;
     line-height: 18px;
     letter-spacing: -0.48px;
   }

@@ -12,19 +12,10 @@
   width: 100%;
 }
 
-.registration__logo-link {
-  align-self: start;
-}
-
-.registration__logo:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
 .registration__heading {
   margin: 0;
   padding: 0;
-  margin: 40px 0 40px;
+  margin: 35px 0 40px;
   text-align: left;
   font-size: 24px;
   font-style: normal;
@@ -80,7 +71,7 @@
 
 .registration-form__button {
   min-height: 45px;
-  margin-top: 130px;
+  margin-top: 126px;
   background-color: rgba(66, 133, 244, 1);
   color: rgba(255, 255, 255, 1);
   border-radius: 3px;
@@ -106,11 +97,13 @@
 .registration__question {
   margin: 0;
   color:rgba(139, 139, 139, 1);
+  letter-spacing: -1.3px;
 }
 
 .registration__question-link {
   color: rgba(66, 133, 244, 1);
   text-decoration: none;
+  letter-spacing: -1.3px;
 }
 
 .registration__question-link:hover {

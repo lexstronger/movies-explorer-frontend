@@ -11,18 +11,17 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.6px;
 }
 
 .project__info {
   display: flex;
   margin: 70px 0 101px;
-  
-  gap: 100px;
+  gap: 90px;
 }
 
 .project__text-block {
-  max-width: 490px;
+  max-width: 500px;
 }
 
 .project__subtitle {
@@ -34,7 +33,6 @@
   line-height: normal;
   letter-spacing: -0.8px;
   min-height: 24px;
-  letter-spacing: -0.15px;
 }
 
 .project__text {
@@ -47,7 +45,6 @@
   font-weight: 400;
   line-height: 20px;
   min-height: 48px;
-  letter-spacing: 0.5px;
 }
 
 .project__schedule {

@@ -2,9 +2,9 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 import "./MenuBurger.css";
 
-function MenuBurger({isOpen, onClose}) {
+function MenuBurger({isOpen, onClose, onOverlayClose}) {
   return (
-    <div className={`popup ${isOpen ? "popup_opened" : ""}`}>
+    <div className={`popup ${isOpen ? "popup_opened" : ""}`} onMouseDown={onOverlayClose}>
       <nav className="popup__container">
         <button
           className="popup__cross"

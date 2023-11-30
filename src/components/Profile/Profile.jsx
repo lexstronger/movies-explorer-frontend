@@ -5,32 +5,18 @@ import "./Profile.css";
 
 function Profile({ onEdit, handleLogout }) {
   const [isEdited, setIsEdited] = useState(true);
-  const [serverResponse, setServerResponse] = useState('');
   const currentUser = React.useContext(CurrentUserContext);
 
   const { form, handleChange, errors, isValid, resetForm } = useFormWithValidation({
     name: currentUser.name,
     email: currentUser.email,
-  });
-  
+  });  
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    setServerResponse('');
     onEdit(form)
       .then(() => {
         setIsEdited(true);
-        setServerResponse('Данные изменены')
-      })
-      .catch((err) => {
-        if (err === 500) {
-          setServerResponse('Ошибка 500');
-        }
-        if (err === 409) {
-          setServerResponse('Ошибка 409');
-        } else {
-          setServerResponse('Ошибка 400');
-        }
       })
   }
 
@@ -41,10 +27,18 @@ function Profile({ onEdit, handleLogout }) {
     });
   }, [currentUser, resetForm]);
 
+  console.log(currentUser.name);
+  console.log(currentUser.email);
+
   function handleEdit(evt) {
     evt.preventDefault();
     setIsEdited(false);
   } 
+
+  const notIdenticInputs = form.name !== currentUser.name || form.email !== currentUser.email;
+  
+  console.log(form.name);
+  console.log(form.email);
 
   return (
     <main className="content">
@@ -89,12 +83,12 @@ function Profile({ onEdit, handleLogout }) {
           </fieldset>
           {!isEdited && (
             <div className="profile__actions-container">
-              <span className="profile-form__error">
+              {/* <span className="profile-form__error">
                 {serverResponse}
-              </span>
+              </span> */}
               <button
                 className="profile__button profile__button-save"
-                disabled={!isValid}
+                disabled={!isValid || !notIdenticInputs}
               >
                 Сохранить
               </button>
@@ -102,6 +96,9 @@ function Profile({ onEdit, handleLogout }) {
           )}
           {isEdited && (
           <div className="profile__actions-container">
+            {/* <span className="profile-form__error profile-form__error_success">
+                {serverResponse}
+              </span> */}
             <button className="profile__button"
               onClick={handleEdit}
             >

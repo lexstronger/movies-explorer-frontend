@@ -11,12 +11,13 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import MenuBurger from "../MenuBurger/MenuBurger";
 import Preloader from "../Preloader/Preloader";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState, useEffect } from "react";
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
-import moviesData from "../../utils/utils";
+import { moviesData } from "../../utils/utils";
 
 function App() {
   const navigate = useNavigate();
@@ -30,16 +31,20 @@ function App() {
   const [movies, setMovies] = useState(restoreFilms());
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isStatus, setIsStatus] = useState({
+    status: "",
+    message: "",
+  });
+// Открытие бургер-меню
   function handleMenuBurgerClick() {
     setIsMenuBurgerOpened(true);
   }
-
+// Закрытие бургер-меню
   function closeMenuBurger() {
     setIsMenuBurgerOpened(false);
   }
-
+//Работа с токеном
   useEffect(() => {
     handleCheckToken();
   }, []);
@@ -82,47 +87,105 @@ function App() {
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if(evt.key === 'Escape') {
+        closePopup();
+      }
+    }
+    if(isInfoTooltipOpen || isMenuBurgerOpened) {
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isInfoTooltipOpen, isMenuBurgerOpened])
+
+  function closePopup() {
+    setIsInfoTooltipOpen(false);
+    setIsMenuBurgerOpened(false);
+  }
+
+  function closePopupByOverlay(evt) {
+    if (evt.target.classList.contains("popup") || evt.target.classList.contains("window")) {
+      closePopup();
+    }
+  }
+// Регистрация
   function handleRegisterUser({ name, email, password }) {
     mainApi
       .register({ name, email, password })
       .then((res) => {
         console.log(res);
+        setIsStatus({
+          status: true,
+          message: "Вы успешно зарегистрировались!",
+        });
         navigate("/signin", { replace: true });
       })
       .catch((err) => {
+        setIsStatus({
+          status: false,
+          message: "Что-то пошло не так! Попробуйте еще раз.",
+        });
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsInfoTooltipOpen(true);
+      })
   }
-
+// Авторизация
   function handleLoginUser({ email, password }) {
     mainApi
       .authorize({ email, password })
       .then(({ token }) => {
+        setIsStatus({
+          status: true,
+          message: "Вы успешно вошли!",
+        });
         setLoggedIn(true);
         mainApi.setAuthHeaders(token);
         localStorage.setItem("jwt", token);
         navigate("/movies", { replace: true });
       })
       .catch((err) => {
+        setIsStatus({
+          status: false,
+          message: "Что-то пошло не так! Попробуйте еще раз.",
+        });
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsInfoTooltipOpen(true);
+      })
   }
-
+//Выход из профиля
   function handleLogout() {
     setLoggedIn(false);
     navigate("/", { replace: true });
     localStorage.removeItem("jwt");
   }
-
+// Редактирование профиля
   function handleEditUser({name, email}) {
     return mainApi
       .editUserInfo({name, email})
       .then((res) => {
         setCurrentUser(res);
+        setIsStatus({
+          status: true,
+          message: "Данные успешно обновлены!",
+        });
       })
       .catch((err) => {
+        setIsStatus({
+          status: false,
+          message: "Что-то пошло не так! Попробуйте еще раз.",
+        });
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsInfoTooltipOpen(true);
+      })
   }
 
   function restoreFilms() {
@@ -130,16 +193,39 @@ function App() {
   }
 
   function getFilms() {
-    return moviesApi.getMovies()
-      .then(films => {
-        const convertedFilms = moviesData(films);
-        setMovies(convertedFilms);
-        localStorage.setItem('movies', JSON.stringify(convertedFilms));
+    moviesApi.getMovies()
+      .then((foundMovies) => {
+      setMovies(moviesData(foundMovies));
+      localStorage.setItem('movies', JSON.stringify(moviesData(foundMovies)));
       })
       .catch((err) => {
         console.log(err);
       });
   }
+// Сохранение фильма
+  function likeMovie(movie) {
+    mainApi.addNewMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies([...savedMovies, newMovie]);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+// Удаление фильма
+  function deleteMovie(movie) {
+    const id = movie._id || savedMovies.find(i => i.id === movie.id)._id;
+    mainApi.deleteMovie(id)
+      .then(() => {
+        setSavedMovies(movies => movies.filter(item => item._id !== id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  // function checkSaved(movie) {
+  //   return savedMovies.some((i) => i._id === movie._id || i.movieId === movie.movieId);
+  // }
 
   if (isLoading) {
     return <Preloader />;
@@ -154,10 +240,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-            <Route path="/movies" element={<Movies loggedIn={loggedIn} movies={movies} getFilms={getFilms}/>} />
+            <Route path="/movies" element={<Movies loggedIn={loggedIn} movies={movies} getFilms={getFilms} onLike={likeMovie}
+            //  checkSaved={checkSaved}
+             />} />
             <Route
               path="/saved-movies"
-              element={<SavedMovies loggedIn={loggedIn} />}
+              element={<SavedMovies loggedIn={loggedIn} movies={savedMovies} getFilms={getFilms} onDelete={deleteMovie}
+              // checkSaved={checkSaved}
+              />}
             />
             <Route
               path="/profile"
@@ -174,7 +264,14 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {footerPathnames.includes(pathname) && <Footer />}
-        <MenuBurger isOpen={isMenuBurgerOpened} onClose={closeMenuBurger} />
+        <MenuBurger isOpen={isMenuBurgerOpened} onClose={closeMenuBurger} onOverlayClose={closePopupByOverlay}/>
+        <InfoTooltip
+            isStatus={isStatus}
+            isOpen={isInfoTooltipOpen}
+            onClose={closePopup}
+            onOverlayClose={closePopupByOverlay}
+            alt={"Статус"}
+          />
       </div>
     </CurrentUserContext.Provider>
   );

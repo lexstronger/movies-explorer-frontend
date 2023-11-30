@@ -109,6 +109,10 @@
   text-align: center;
 }
 
+.profile-form__error_success {
+  color: rgba(61, 220, 132, 1);
+}
+
 .profile__button {
   color: rgba(255, 255, 255, 1);
   border: none;

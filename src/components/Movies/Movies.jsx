@@ -58,7 +58,6 @@ function Movies({movies, getFilms}) {
     <main className="movies">
       <SearchForm handleChange={handleChange} form={form} onSearch={searchFilms}/>
       <MoviesCardList sortedMovies={sortedMovies}/>
-      <button className="movies__button">Еще</button>
     </main>
   );
 }

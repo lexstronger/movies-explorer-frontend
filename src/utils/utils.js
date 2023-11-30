@@ -1,23 +1,5 @@
 const MOVIES_URL = 'https://api.nomoreparties.co';
 
-function moviesData(movies) {
-  return movies.map((movie) => {
-    return {
-      country: movie.country,
-      director: movie.director,
-      duration: movie.duration,
-      year: movie.year,
-      description: movie.description,
-      image: `${MOVIES_URL}${movie.image.url}`,
-      trailerLink: movie.trailerLink,
-      thumbnail: `${MOVIES_URL}${movie.image.formats.thumbnail.url}`,
-      movieId: movie.id,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-    }
-  })
-}
-
 function sortMovies(movies, keyword, isShort) {
   const searchByWord = (word) => {
     return word.toLowerCase().includes(keyword.toLowerCase())
@@ -41,18 +23,36 @@ function timeDuration(time) {
   return `${Math.floor(time / 60)}ч ${time % 60}м`;
 }
 
-function amountInitialMovies(width) {
-  let moviesAmount;
-  if (width < 768) moviesAmount = 5;
-  if (width >= 768) moviesAmount = 8;
-  if (width >= 1280) moviesAmount = 12;
-  return moviesAmount;
+function quantityInitialMovies(width) {
+  let quantityMovies;
+  if (width < 480) quantityMovies = 5;
+  if (width >= 480) quantityMovies = 8;
+  if (width >= 800) quantityMovies = 12;
+  return quantityMovies;
 }
 
-function amountAddedMovies(width) {
-  let addAmount;
-  if (width < 1280) addAmount = 2;
-  if (width >= 1280) addAmount = 3;
-  return addAmount;
+function quantityAddedMovies(width) {
+  let quantityAdded;
+  if (width < 800) quantityAdded = 2;
+  if (width >= 800) quantityAdded = 3;
+  return quantityAdded;
 }
-export {moviesData, timeDuration, amountInitialMovies, amountAddedMovies, sortMovies};
+
+function moviesData(movies) {
+  return movies.map((movie) => {
+    return {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: `${MOVIES_URL}${movie.image.url}`,
+      trailerLink: movie.trailerLink,
+      thumbnail: `${MOVIES_URL}${movie.image.formats.thumbnail.url}`,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }
+  })
+}
+export {timeDuration, quantityInitialMovies, quantityAddedMovies, sortMovies, moviesData, };

@@ -245,7 +245,7 @@ function App() {
              />} />
             <Route
               path="/saved-movies"
-              element={<SavedMovies loggedIn={loggedIn} movies={savedMovies} getFilms={getFilms} onDelete={deleteMovie}
+              element={<SavedMovies loggedIn={loggedIn} movies={savedMovies} onDelete={deleteMovie}
               // checkSaved={checkSaved}
               />}
             />

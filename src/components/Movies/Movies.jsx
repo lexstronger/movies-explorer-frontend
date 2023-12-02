@@ -6,8 +6,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import { useFormWithValidation } from "../../hooks/useForm";
 import { sortMovies } from "../../utils/utils";
 
-function Movies({movies, getFilms}) {
-  const location = useLocation().pathname;
+function Movies({movies, getFilms, onLike, onDelete, checkSaved}) {
   const [sortedMovies, setSortedMovies] = React.useState(recoverPreviousSearch().sortedMovies);
   
   const { form, handleChange } = useFormWithValidation(recoverPreviousSearch().form);
@@ -16,33 +15,40 @@ function Movies({movies, getFilms}) {
     if (movies.length === 0 && getFilms) {
       return;
     }
+    if (!form.keyword) {
+      setSortedMovies([]);
+      return;
+    }
     setSortedMovies(sortMovies(movies, form.keyword, form.checkbox));
   }, [movies, form.checkbox, getFilms, form.keyword]);
 
   function searchFilms (keyword, isShort) {
+    
     if (movies.length === 0 && getFilms) {
       getFilms();
+      
+    } else if (!keyword) {
+      setSortedMovies([]);
     } else {
       setSortedMovies(sortMovies(movies, keyword, isShort));
     }
   }
 
   React.useEffect(() => {
-    if (location !== '/movies') return;
+  localStorage.setItem('previousSearch', JSON.stringify({
+    sortedMovies,
+    form,
+  }))
+  }, [sortedMovies, form])
+
+  React.useEffect(() => {
     localStorage.setItem('previousSearch', JSON.stringify({
       sortedMovies,
       form,
     }));
-  }, [sortedMovies, form.checkbox, location, form]);
+  }, [sortedMovies, form.checkbox, form]);
 
   function recoverPreviousSearch() {
-    if (location !== '/movies') return {
-      form: {
-        keyword: '',
-        checkbox: false,
-      },
-      sortedMovies: [],      
-    };
     const previousSearch = JSON.parse(localStorage.getItem('previousSearch'));
     if (!previousSearch) return {
       form: {
@@ -51,13 +57,14 @@ function Movies({movies, getFilms}) {
       },
       sortedMovies: [],      
     };
+    console.log(456);
     return previousSearch;
   };
 
   return(
     <main className="movies">
       <SearchForm handleChange={handleChange} form={form} onSearch={searchFilms}/>
-      <MoviesCardList sortedMovies={sortedMovies}/>
+      <MoviesCardList sortedMovies={sortedMovies} checkSaved={checkSaved} onDelete={onDelete} onLike={onLike}/>
     </main>
   );
 }

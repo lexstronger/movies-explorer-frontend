@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 import { timeDuration } from "../../utils/utils";
 import "./MoviesCard.css";
 
-function MoviesCard({movie}) {
+function MoviesCard({movie, checkSaved, onLike, onDelete}) {
   const pathname = useLocation().pathname;
-  // const isSavedMovie = checkSaved(movie);
+  const isSavedMovie = checkSaved ? checkSaved(movie) : true; 
 
-  // const movieLikeButtonClassName = `movie-card__button ${isSavedMovie ? "movie-card__button_save" : ""}`;
-
+  const movieLikeButtonClassName = `movie-card__button ${isSavedMovie ? "movie-card__button_save" : ""}`;
+  console.log(isSavedMovie)
   // function handleLikeMovie() {
   //   !isSavedMovie && onLike(movie);
   // }
@@ -16,6 +16,8 @@ function MoviesCard({movie}) {
   // function handleDeleteMovie() {
   //   onDelete(movie);
   // }
+
+  const handleLike = () => (!isSavedMovie ? onLike(movie) : onDelete(movie));
   return (
     <>
       <li className="movie-card">
@@ -28,11 +30,14 @@ function MoviesCard({movie}) {
         </a>
         {pathname === "/movies" ? (
           <button
-           className='movie-card__button'
+           className={movieLikeButtonClassName}
             name="like" type="button"
+             onClick={handleLike}
              >Сохранить</button>
         ) : (
-          <button className="movie-card__button movie-card__button_delete" name="delete" type="button"></button>
+          <button className="movie-card__button movie-card__button_delete" name="delete" type="button"
+           onClick={handleLike}
+           ></button>
         )}
       </li>
     </>

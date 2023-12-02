@@ -5,7 +5,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import useResize from "../../hooks/useResize";
 import { quantityInitialMovies, quantityAddedMovies } from "../../utils/utils";
 
-function MoviesCardList({sortedMovies}) {
+function MoviesCardList({sortedMovies, checkSaved, onLike, onDelete}) {
 
   const location = useLocation().pathname;
   const [quantityMovies, setQuantityMovies] = React.useState('');
@@ -16,7 +16,7 @@ function MoviesCardList({sortedMovies}) {
   React.useEffect(() => {
     setQuantityMovies(quantityInitialMovies(sizeWindow));
     setQuantityAdded(quantityAddedMovies(sizeWindow));
-  }, [sizeWindow]);
+  }, [sizeWindow, sortedMovies]);
 
   function loadMoreCards() {
     setQuantityMovies(quantityMovies + quantityAdded);
@@ -31,12 +31,15 @@ function MoviesCardList({sortedMovies}) {
         image={movie.image}
         nameRU={movie.nameRU}
         duration={movie.duration}
+        checkSaved={checkSaved}
+        onDelete={onDelete}
+        onLike={onLike}
         />
         ))
         }   
       </ul>
       {
-      (location === '/movies' && (sortedMovies.length > quantityMovies)) 
+      (sortedMovies.length > quantityMovies)
         &&
       <button className="movies__button" onClick={loadMoreCards}>Еще</button>}
     </section>

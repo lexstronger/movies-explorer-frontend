@@ -32,6 +32,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  
   const [isStatus, setIsStatus] = useState({
     status: "",
     message: "",
@@ -80,8 +81,8 @@ function App() {
     if (loggedIn) {
       mainApi
         .getSavedMovies()
-        .then(() => {
-          setSavedMovies();
+        .then((movies) => {
+          setSavedMovies(movies);
         })
         .catch((err) => console.log(err));
     }
@@ -170,7 +171,7 @@ function App() {
     return mainApi
       .editUserInfo({name, email})
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.user);
         setIsStatus({
           status: true,
           message: "Данные успешно обновлены!",
@@ -206,7 +207,7 @@ function App() {
   function likeMovie(movie) {
     mainApi.addNewMovie(movie)
     .then((newMovie) => {
-      setSavedMovies([...savedMovies, newMovie]);
+      setSavedMovies([...savedMovies, newMovie.movie]);
     })
     .catch((err) => {
       console.log(err);
@@ -223,9 +224,9 @@ function App() {
         console.log(err);
       });
   }
-  // function checkSaved(movie) {
-  //   return savedMovies.some((i) => i._id === movie._id || i.movieId === movie.movieId);
-  // }
+  function checkSaved(movie) {
+    return savedMovies.some((i) => i.movieId === movie.movieId);
+  }
 
   if (isLoading) {
     return <Preloader />;
@@ -240,13 +241,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-            <Route path="/movies" element={<Movies loggedIn={loggedIn} movies={movies} getFilms={getFilms} onLike={likeMovie}
-            //  checkSaved={checkSaved}
+            <Route path="/movies" element={<Movies loggedIn={loggedIn} movies={movies} getFilms={getFilms} onLike={likeMovie} onDelete={deleteMovie}
+             checkSaved={checkSaved}
              />} />
             <Route
               path="/saved-movies"
               element={<SavedMovies loggedIn={loggedIn} movies={savedMovies} onDelete={deleteMovie}
-              // checkSaved={checkSaved}
               />}
             />
             <Route

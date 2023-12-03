@@ -5,7 +5,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import useResize from "../../hooks/useResize";
 import { quantityInitialMovies, quantityAddedMovies } from "../../utils/utils";
 
-function MoviesCardList({sortedMovies, checkSaved, onLike, onDelete}) {
+function MoviesCardList({sortedMovies, checkSaved, onLike, onDelete, errorText, unsuccessfulSearch}) {
 
   const location = useLocation().pathname;
   const [quantityMovies, setQuantityMovies] = React.useState('');
@@ -23,6 +23,11 @@ function MoviesCardList({sortedMovies, checkSaved, onLike, onDelete}) {
   }
   return(
     <section className="movies-cards">
+      { 
+        !errorText && sortedMovies.length === 0 
+        && unsuccessfulSearch
+        && <p className='movies-cards__error'>{unsuccessfulSearch}</p>
+      }
       <ul className="movies-cards__list">
         {
         ((location === '/movies') ? initialMovies : sortedMovies).map((movie) =>(

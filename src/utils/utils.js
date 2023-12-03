@@ -1,4 +1,5 @@
-const MOVIES_URL = 'https://api.nomoreparties.co';
+import { MOVIES_URL, SCREEN_SIZE, TIME_SHORTMOVIES, QUANTITY_MOVIES, QUANTITY_ADDED_MOVIES } from "./constants";
+
 
 function sortMovies(movies, keyword, isShort) {
   const searchByWord = (word) => {
@@ -11,7 +12,7 @@ function sortMovies(movies, keyword, isShort) {
 
   if (isShort) {
     const shortMovies = sortedMoviesByKeyword.filter((movie) => {
-      return movie.duration <= 40;
+      return movie.duration <= TIME_SHORTMOVIES;
     })
     return shortMovies;
   } else {
@@ -25,16 +26,16 @@ function timeDuration(time) {
 
 function quantityInitialMovies(width) {
   let quantityMovies;
-  if (width < 480) quantityMovies = 5;
-  if (width >= 480) quantityMovies = 8;
-  if (width >= 800) quantityMovies = 12;
+  if (width < SCREEN_SIZE.SMALL) quantityMovies = QUANTITY_MOVIES.MIN;
+  if (width >= SCREEN_SIZE.SMALL) quantityMovies = QUANTITY_MOVIES.MED;
+  if (width >= SCREEN_SIZE.BIG) quantityMovies = QUANTITY_MOVIES.MAX;
   return quantityMovies;
 }
 
 function quantityAddedMovies(width) {
   let quantityAdded;
-  if (width < 800) quantityAdded = 2;
-  if (width >= 800) quantityAdded = 3;
+  if (width < SCREEN_SIZE.BIG) quantityAdded = QUANTITY_ADDED_MOVIES.FEW;
+  if (width >= SCREEN_SIZE.BIG) quantityAdded = QUANTITY_ADDED_MOVIES.MANY;
   return quantityAdded;
 }
 

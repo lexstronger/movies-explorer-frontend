@@ -87,7 +87,7 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [loggedIn]);
-
+// Закрытие окна по esc
   useEffect(() => {
     function closeByEscape(evt) {
       if(evt.key === 'Escape') {
@@ -106,7 +106,7 @@ function App() {
     setIsInfoTooltipOpen(false);
     setIsMenuBurgerOpened(false);
   }
-
+// Закрытие окна по оверлею
   function closePopupByOverlay(evt) {
     if (evt.target.classList.contains("popup") || evt.target.classList.contains("window")) {
       closePopup();
@@ -164,7 +164,8 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     navigate("/", { replace: true });
-    localStorage.removeItem("jwt");
+    localStorage.clear();
+    setMovies([]);
   }
 // Редактирование профиля
   function handleEditUser({name, email}) {
@@ -224,6 +225,7 @@ function App() {
         console.log(err);
       });
   }
+  //Проверка лайка
   function checkSaved(movie) {
     return savedMovies.some((i) => i.movieId === movie.movieId);
   }

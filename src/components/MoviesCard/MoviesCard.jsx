@@ -8,7 +8,6 @@ function MoviesCard({movie, checkSaved, onLike, onDelete}) {
   const isSavedMovie = checkSaved ? checkSaved(movie) : true; 
 
   const movieLikeButtonClassName = `movie-card__button ${isSavedMovie ? "movie-card__button_save" : ""}`;
-  console.log(isSavedMovie)
   // function handleLikeMovie() {
   //   !isSavedMovie && onLike(movie);
   // }

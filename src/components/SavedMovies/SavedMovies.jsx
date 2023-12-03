@@ -6,7 +6,7 @@ import { sortMovies } from "../../utils/utils";
 import { useLocation } from "react-router-dom";
 import { useFormWithValidation } from "../../hooks/useForm";
 
-function SavedMovies({movies, getFilms, onSearch}) {
+function SavedMovies({movies, getFilms, onSearch, onDelete}) {
   const location = useLocation().pathname;
   const [sortedMovies, setSortedMovies] = React.useState(recoverPreviousSearch().sortedMovies);
   
@@ -53,7 +53,7 @@ function SavedMovies({movies, getFilms, onSearch}) {
   return(
     <main className="saved-movies">
       <SearchForm handleChange={handleChange} form={form} onSearch={searchFilms}/>
-      <MoviesCardList sortedMovies={sortedMovies}/>
+      <MoviesCardList sortedMovies={sortedMovies} onDelete={onDelete}/>
     </main>
   );
 }

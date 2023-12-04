@@ -97,7 +97,7 @@ function Movies({ movies, getFilms, onLike, onDelete, checkSaved }) {
           onDelete={onDelete}
           onLike={onLike}
           errorText={errorText}
-          uznsuccessfulSearch={unsuccessfulSearch}
+          unsuccessfulSearch={unsuccessfulSearch}
         />
       )}
     </main>

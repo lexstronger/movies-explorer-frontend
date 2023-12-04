@@ -32,20 +32,20 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  
+
   const [isStatus, setIsStatus] = useState({
     status: "",
     message: "",
   });
-// Открытие бургер-меню
+  // Открытие бургер-меню
   function handleMenuBurgerClick() {
     setIsMenuBurgerOpened(true);
   }
-// Закрытие бургер-меню
+  // Закрытие бургер-меню
   function closeMenuBurger() {
     setIsMenuBurgerOpened(false);
   }
-//Работа с токеном
+  //Работа с токеном
   useEffect(() => {
     handleCheckToken();
   }, []);
@@ -70,7 +70,7 @@ function App() {
     if (loggedIn) {
       mainApi
         .getCurrentUser()
-        .then(({data}) => {
+        .then(({ data }) => {
           setCurrentUser(data);
         })
         .catch((err) => console.log(err));
@@ -87,32 +87,35 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [loggedIn]);
-// Закрытие окна по esc
+  // Закрытие окна по esc
   useEffect(() => {
     function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
+      if (evt.key === "Escape") {
         closePopup();
       }
     }
-    if(isInfoTooltipOpen || isMenuBurgerOpened) {
-      document.addEventListener('keydown', closeByEscape);
+    if (isInfoTooltipOpen || isMenuBurgerOpened) {
+      document.addEventListener("keydown", closeByEscape);
       return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
+        document.removeEventListener("keydown", closeByEscape);
+      };
     }
-  }, [isInfoTooltipOpen, isMenuBurgerOpened])
+  }, [isInfoTooltipOpen, isMenuBurgerOpened]);
 
   function closePopup() {
     setIsInfoTooltipOpen(false);
     setIsMenuBurgerOpened(false);
   }
-// Закрытие окна по оверлею
+  // Закрытие окна по оверлею
   function closePopupByOverlay(evt) {
-    if (evt.target.classList.contains("popup") || evt.target.classList.contains("window")) {
+    if (
+      evt.target.classList.contains("popup") ||
+      evt.target.classList.contains("window")
+    ) {
       closePopup();
     }
   }
-// Регистрация
+  // Регистрация
   function handleRegisterUser({ name, email, password }) {
     mainApi
       .register({ name, email, password })
@@ -122,7 +125,7 @@ function App() {
           status: true,
           message: "Вы успешно зарегистрировались!",
         });
-        navigate("/signin", { replace: true });
+        handleLoginUser({ email, password });
       })
       .catch((err) => {
         setIsStatus({
@@ -133,9 +136,9 @@ function App() {
       })
       .finally(() => {
         setIsInfoTooltipOpen(true);
-      })
+      });
   }
-// Авторизация
+  // Авторизация
   function handleLoginUser({ email, password }) {
     mainApi
       .authorize({ email, password })
@@ -158,19 +161,19 @@ function App() {
       })
       .finally(() => {
         setIsInfoTooltipOpen(true);
-      })
+      });
   }
-//Выход из профиля
+  //Выход из профиля
   function handleLogout() {
     setLoggedIn(false);
     navigate("/", { replace: true });
     localStorage.clear();
     setMovies([]);
   }
-// Редактирование профиля
-  function handleEditUser({name, email}) {
+  // Редактирование профиля
+  function handleEditUser({ name, email }) {
     return mainApi
-      .editUserInfo({name, email})
+      .editUserInfo({ name, email })
       .then((res) => {
         setCurrentUser(res.user);
         setIsStatus({
@@ -187,39 +190,42 @@ function App() {
       })
       .finally(() => {
         setIsInfoTooltipOpen(true);
-      })
+      });
   }
 
   function restoreFilms() {
-    return JSON.parse(localStorage.getItem('movies') ?? '[]');
+    return JSON.parse(localStorage.getItem("movies") ?? "[]");
   }
 
   function getFilms() {
-    moviesApi.getMovies()
+    moviesApi
+      .getMovies()
       .then((foundMovies) => {
-      setMovies(moviesData(foundMovies));
-      localStorage.setItem('movies', JSON.stringify(moviesData(foundMovies)));
+        setMovies(moviesData(foundMovies));
+        localStorage.setItem("movies", JSON.stringify(moviesData(foundMovies)));
       })
       .catch((err) => {
         console.log(err);
       });
   }
-// Сохранение фильма
+  // Сохранение фильма
   function likeMovie(movie) {
-    mainApi.addNewMovie(movie)
-    .then((newMovie) => {
-      setSavedMovies([...savedMovies, newMovie.movie]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    mainApi
+      .addNewMovie(movie)
+      .then((newMovie) => {
+        setSavedMovies([...savedMovies, newMovie.movie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-// Удаление фильма
+  // Удаление фильма
   function deleteMovie(movie) {
-    const id = movie._id || savedMovies.find(i => i.id === movie.id)._id;
-    mainApi.deleteMovie(id)
+    const id = movie._id || savedMovies.find((i) => i.id === movie.id)._id;
+    mainApi
+      .deleteMovie(id)
       .then(() => {
-        setSavedMovies(movies => movies.filter(item => item._id !== id));
+        setSavedMovies((movies) => movies.filter((item) => item._id !== id));
       })
       .catch((err) => {
         console.log(err);
@@ -243,37 +249,65 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route element={<ProtectedRoutes loggedIn={loggedIn} />}>
-            <Route path="/movies" element={<Movies loggedIn={loggedIn} movies={movies} getFilms={getFilms} onLike={likeMovie} onDelete={deleteMovie}
-             checkSaved={checkSaved}
-             />} />
+            <Route
+              path="/movies"
+              element={
+                <Movies
+                  loggedIn={loggedIn}
+                  movies={movies}
+                  getFilms={getFilms}
+                  onLike={likeMovie}
+                  onDelete={deleteMovie}
+                  checkSaved={checkSaved}
+                />
+              }
+            />
             <Route
               path="/saved-movies"
-              element={<SavedMovies loggedIn={loggedIn} movies={savedMovies} onDelete={deleteMovie}
-              />}
+              element={
+                <SavedMovies
+                  loggedIn={loggedIn}
+                  movies={savedMovies}
+                  onDelete={deleteMovie}
+                />
+              }
             />
             <Route
               path="/profile"
               element={
-                <Profile loggedIn={loggedIn} onEdit={handleEditUser} handleLogout={handleLogout} />
+                <Profile
+                  loggedIn={loggedIn}
+                  onEdit={handleEditUser}
+                  handleLogout={handleLogout}
+                />
               }
             />
           </Route>
-          <Route path="/signin" element={<Login onLogin={handleLoginUser} />} />
-          <Route
-            path="/signup"
-            element={<Register OnRegister={handleRegisterUser} />}
-          />
+          <Route element={<ProtectedRoutes loggedIn={!loggedIn} />}>
+            <Route
+              path="/signin"
+              element={<Login onLogin={handleLoginUser} />}
+            />
+            <Route
+              path="/signup"
+              element={<Register OnRegister={handleRegisterUser} />}
+            />
+          </Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {footerPathnames.includes(pathname) && <Footer />}
-        <MenuBurger isOpen={isMenuBurgerOpened} onClose={closeMenuBurger} onOverlayClose={closePopupByOverlay}/>
+        <MenuBurger
+          isOpen={isMenuBurgerOpened}
+          onClose={closeMenuBurger}
+          onOverlayClose={closePopupByOverlay}
+        />
         <InfoTooltip
-            isStatus={isStatus}
-            isOpen={isInfoTooltipOpen}
-            onClose={closePopup}
-            onOverlayClose={closePopupByOverlay}
-            alt={"Статус"}
-          />
+          isStatus={isStatus}
+          isOpen={isInfoTooltipOpen}
+          onClose={closePopup}
+          onOverlayClose={closePopupByOverlay}
+          alt={"Статус"}
+        />
       </div>
     </CurrentUserContext.Provider>
   );

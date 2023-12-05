@@ -9,6 +9,7 @@ import { useFormWithValidation } from "../../hooks/useForm";
 function SavedMovies({movies, getFilms, onSearch, onDelete}) {
   const location = useLocation().pathname;
   const [sortedMovies, setSortedMovies] = React.useState(recoverPreviousSearch().sortedMovies);
+  const [unsuccessfulSearch, setUnsuccessfulSearch] = React.useState("");
   
   const { form, handleChange } = useFormWithValidation(recoverPreviousSearch().form);
 
@@ -24,13 +25,13 @@ function SavedMovies({movies, getFilms, onSearch, onDelete}) {
     }
   }
 
-  React.useEffect(() => {
-    if (location === '/saved-movies') return;
+  React.useEffect(() => {    
     localStorage.setItem('previousSearch', JSON.stringify({
       sortedMovies,
       form,
     }));
-  }, [sortedMovies, form.checkbox, location, form]);
+    setUnsuccessfulSearch(sortedMovies.length === 0 ? "Ничего не найдено" : "");
+  }, [sortedMovies, form.checkbox, form]);
 
   function recoverPreviousSearch() {
     if (location === '/saved-movies') return {
@@ -53,7 +54,7 @@ function SavedMovies({movies, getFilms, onSearch, onDelete}) {
   return(
     <main className="saved-movies">
       <SearchForm handleChange={handleChange} form={form} onSearch={searchFilms}/>
-      <MoviesCardList sortedMovies={sortedMovies} onDelete={onDelete}/>
+      <MoviesCardList sortedMovies={sortedMovies} onDelete={onDelete} unsuccessfulSearch={unsuccessfulSearch}/>
     </main>
   );
 }

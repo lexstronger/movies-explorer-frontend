@@ -26,13 +26,9 @@ function SavedMovies({movies, getFilms, onSearch, onDelete}) {
   }
 
   React.useEffect(() => {   
-    if (location === '/saved-movies') return; 
-    localStorage.setItem('previousSearch', JSON.stringify({
-      sortedMovies,
-      form,
-    }));
+    if (movies.length === 0) return;     
     setUnsuccessfulSearch(sortedMovies.length === 0 ? "Ничего не найдено" : "");
-  }, [sortedMovies, form.checkbox, form, location]);
+  }, [sortedMovies, form.checkbox]);
 
   function recoverPreviousSearch() {
     if (location === '/saved-movies') return {

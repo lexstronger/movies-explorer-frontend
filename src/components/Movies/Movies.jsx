@@ -42,6 +42,7 @@ function Movies({ movies, getFilms, onLike, onDelete, checkSaved }) {
   }, [sortedMovies, form]);
 
   React.useEffect(() => {
+    if (movies.length === 0) return; 
     localStorage.setItem(
       "previousSearch",
       JSON.stringify({
@@ -50,7 +51,7 @@ function Movies({ movies, getFilms, onLike, onDelete, checkSaved }) {
       })
     );
     setUnsuccessfulSearch(sortedMovies.length === 0 ? "Ничего не найдено" : "");
-  }, [sortedMovies, form.checkbox, form]);
+  }, [sortedMovies, form.checkbox]);
 
   function recoverPreviousSearch() {
     const previousSearch = JSON.parse(localStorage.getItem("previousSearch"));

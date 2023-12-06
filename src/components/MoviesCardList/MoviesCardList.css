@@ -12,6 +12,13 @@
   gap: 32px;  
 }
 
+.movies-cards__error {
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 400;
+}
+
 @media screen and (max-width: 800px) {
   .movies-cards__list {
     grid-template-columns: repeat(2, 1fr);

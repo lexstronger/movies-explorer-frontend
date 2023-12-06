@@ -23,12 +23,15 @@
 .movie-card__title {
   margin: 0;
   padding: 0;
-  max-width: 240px;
+  max-width: 260px;
   min-height: 18px;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .movie-card__duration {
@@ -40,7 +43,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  min-height: 18px;
+  white-space: nowrap;
 }
 
 .movie-card__image {
@@ -68,13 +71,15 @@
 
 .movie-card__button_save {
   background-image: url('../../images/save.svg');
+  font-size: 0;
 }
 
 .movie-card__button_delete {
   background-image: url('../../images/delete.svg');
   background-position: center;
   background-repeat: no-repeat;
-  color: rgba(255, 255, 255, 1)
+  color: rgba(255, 255, 255, 1);
+  font-size: 0;
 }
 
 .movie-card__button:hover {

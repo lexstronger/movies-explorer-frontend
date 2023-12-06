@@ -2,14 +2,31 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Register.css";
 import Logo from "../Logo/Logo";
+import { useFormWithValidation } from "../../hooks/useForm";
 
-function Register({ handleRegister }) {
+function Register({ OnRegister }) {
+
+  const { form, handleChange, errors, isValid, resetForm } = useFormWithValidation({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    OnRegister(form);
+  }
+
+  React.useEffect(() => {
+    resetForm();
+  }, [resetForm]);
+
   return (
     <main className="content">
       <section className="registration">
         <Logo/>
         <h1 className="registration__heading">Добро пожаловать!</h1>
-        <form className="registration-form" action="#" name="registration">
+        <form className="registration-form" action="#" name="registration" onSubmit={handleSubmit} noValidate>
           <fieldset className="registration-form__fieldset">
             <div className="registration-form__container">
               <label className="registration-form__label">Имя</label>
@@ -22,7 +39,10 @@ function Register({ handleRegister }) {
                 required
                 minLength="5"
                 maxLength="30"
+                onChange={handleChange}
+                value={form.name || ''}
               />
+              <span className="registration-form__error">{errors.name}</span>
             </div>
             <div className="registration-form__container">
               <label className="registration-form__label">E-mail</label>
@@ -35,7 +55,10 @@ function Register({ handleRegister }) {
                 required
                 minLength="5"
                 maxLength="30"
+                onChange={handleChange}
+                value={form.email || ''}
               />
+              <span className="registration-form__error">{errors.email}</span>
             </div>
             <div className="registration-form__container">
               <label className="registration-form__label">Пароль</label>
@@ -48,13 +71,17 @@ function Register({ handleRegister }) {
                 required
                 minLength="5"
                 maxLength="30"
+                onChange={handleChange}
+                value={form.password || ''}
               />
+              <span className="registration-form__error">{errors.password}</span>
             </div>
           </fieldset>
           <span className="registration-form__error"></span>
           <button
             className="registration-form__button"
-            onClick={handleRegister}
+            disabled={!isValid}
+            type="submit"
           >
             Зарегистрироваться
           </button>

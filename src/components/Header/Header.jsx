@@ -4,7 +4,7 @@ import "./Header.css";
 import Navigation from '../Navigation/Navigation';
 import Logo from '../Logo/Logo';
 
-function Header({LoggedIn, onBurgerClick}) {
+function Header({loggedIn, onBurgerClick}) {
   const location = useLocation();
 
   return (
@@ -12,7 +12,7 @@ function Header({LoggedIn, onBurgerClick}) {
         location.pathname === '/' ? 'blue' : ''
       }`}>        
         <Logo/>
-        <Navigation LoggedIn={LoggedIn} onBurgerClick={onBurgerClick}/>
+        <Navigation loggedIn={loggedIn} onBurgerClick={onBurgerClick}/>
       </header>
   );
 }

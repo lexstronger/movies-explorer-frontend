@@ -6,3 +6,9 @@
   opacity: 0.8;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .logo-link {
+    align-self: center;
+  }
+}

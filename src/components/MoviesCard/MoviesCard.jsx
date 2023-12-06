@@ -1,105 +1,36 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { timeDuration } from "../../utils/utils";
 import "./MoviesCard.css";
-import movie1 from "../../images/movie-1.png";
-import movie2 from "../../images/movie-2.png";
-import movie3 from "../../images/movie-3.png";
 
-function MoviesCard() {
+function MoviesCard({movie, checkSaved, onLike, onDelete}) {
   const pathname = useLocation().pathname;
+  const isSavedMovie = checkSaved ? checkSaved(movie) : true; 
+
+  const movieLikeButtonClassName = `movie-card__button ${isSavedMovie ? "movie-card__button_save" : ""}`;
+
+  const handleLike = () => (!isSavedMovie ? onLike(movie) : onDelete(movie));
   return (
     <>
       <li className="movie-card">
         <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
+          <h2 className="movie-card__title">{movie.nameRU}</h2>
+          <p className="movie-card__duration">{timeDuration(movie.duration)}</p>
         </div>
-        <img className="movie-card__image" src={movie1} alt="Кадр фильма" />
+        <a className="movie-card__image-link" href={movie.trailerLink} target='_blank' rel='noreferrer'>
+          <img className="movie-card__image" src={movie.image} alt={movie.nameRU} />
+        </a>
         {pathname === "/movies" ? (
-          <button className="movie-card__button movie-card__button_save"></button>
+          <button
+           className={movieLikeButtonClassName}
+            name="like" type="button"
+             onClick={handleLike}
+             >Сохранить</button>
         ) : (
-          <button className="movie-card__button movie-card__button_delete"></button>
+          <button className="movie-card__button movie-card__button_delete" name="delete" type="button"
+           onClick={handleLike}
+           ></button>
         )}
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie2} alt="Кадр фильма" />
-        {pathname === "/movies" ? (
-          <button className="movie-card__button movie-card__button_save"></button>
-        ) : (
-          <button className="movie-card__button movie-card__button_delete"></button>
-        )}
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie3} alt="Кадр фильма" />
-        <button className="movie-card__button">Сохранить</button>
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie1} alt="Кадр фильма" />
-        <button className="movie-card__button">Сохранить</button>
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie2} alt="Кадр фильма" />
-        <button className="movie-card__button">Сохранить</button>
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie3} alt="Кадр фильма" />
-        {pathname === "/movies" ? (
-          <button className="movie-card__button movie-card__button_save"></button>
-        ) : (
-          <button className="movie-card__button movie-card__button_delete"></button>
-        )}
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie1} alt="Кадр фильма" />
-        {pathname === "/movies" ? (
-          <button className="movie-card__button movie-card__button_save"></button>
-        ) : (
-          <button className="movie-card__button movie-card__button_delete"></button>
-        )}
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie2} alt="Кадр фильма" />
-        {pathname === "/movies" ? (
-          <button className="movie-card__button movie-card__button_save"></button>
-        ) : (
-          <button className="movie-card__button movie-card__button_delete"></button>
-        )}
-      </li>
-      <li className="movie-card">
-        <div className="movie-card__description">
-          <h2 className="movie-card__title">В погоне за Бенкси</h2>
-          <p className="movie-card__duration">0ч 42м</p>
-        </div>
-        <img className="movie-card__image" src={movie3} alt="Кадр фильма" />
-        <button className="movie-card__button">Сохранить</button>
       </li>
     </>
   );

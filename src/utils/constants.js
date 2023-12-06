@@ -1,0 +1,21 @@
+const MOVIES_URL = 'https://api.nomoreparties.co';
+
+const TIME_SHORTMOVIES = 40;
+
+const SCREEN_SIZE = {
+  BIG: 800,
+  SMALL: 480,
+}
+
+const QUANTITY_MOVIES = {
+  MAX: 12,
+  MED: 8,
+  MIN: 5,
+}
+
+const QUANTITY_ADDED_MOVIES = {
+  MANY: 3,
+  FEW: 2,
+}
+
+export {MOVIES_URL, TIME_SHORTMOVIES, SCREEN_SIZE, QUANTITY_MOVIES, QUANTITY_ADDED_MOVIES}

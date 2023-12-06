@@ -2,10 +2,10 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation({ LoggedIn, handleLogin, onBurgerClick }) {
+function Navigation({ loggedIn, handleLogin, onBurgerClick }) {
   return (
     <>
-      {!LoggedIn ? (
+      {!loggedIn ? (
         <nav className="navigation">
           <Link className="navigation__link" to="/signup">
             Регистрация
